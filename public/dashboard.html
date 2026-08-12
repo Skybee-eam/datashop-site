@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Dashboard | DataHub</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Space+Grotesk:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/dashboard.css">
+  <script>
+    if (localStorage.getItem('theme') === 'light') {
+      document.documentElement.setAttribute('data-theme', 'light');
+    }
+  </script>
+</head>
+<body>
+
+  <!-- Left Sidebar -->
+  <aside class="dash-sidebar" id="dashSidebar">
+    <div class="dash-sidebar-header">
+      <a href="index.html" class="user-brand">
+        <h1>DataHub GH</h1>
+      </a>
+    </div>
+    <nav class="dash-sidebar-nav">
+      <a href="#" class="dash-sidebar-link active"><span>&#x1F3E0;</span> Dashboard</a>
+      <a href="#quickBuy" class="dash-sidebar-link"><span>&#x26A1;</span> Buy Data</a>
+      <a href="#" onclick="openFundModal()" class="dash-sidebar-link"><span>&#x1F4B3;</span> Fund Wallet</a>
+      <a href="#history" class="dash-sidebar-link"><span>&#x1F4CB;</span> Order History</a>
+      <a href="admin.html" class="dash-sidebar-link"><span>&#x1F4CA;</span> Admin Panel</a>
+      <a href="#" onclick="localStorage.removeItem('datashop_user'); window.location.href='index.html';" class="dash-sidebar-link" style="margin-top: auto;"><span>&#x1F6AA;</span> Sign Out</a>
+    </nav>
+  </aside>
+
+  <!-- Main Content Wrapper -->
+  <div class="dash-main-wrap">
+    
+    <!-- Top Header Bar -->
+    <header class="user-header">
+      <div style="display: flex; align-items: center; gap: 16px;">
+        <button class="mobile-toggle" id="dashMobileToggle">&#9776;</button>
+        <span style="font-weight: 700; font-size: 1.1rem;">Reseller Portal</span>
+      </div>
+      <div class="user-nav-actions">
+        <button id="themeToggle" class="theme-toggle" aria-label="Toggle Theme">☀️</button>
+        <div class="wallet-badge">
+          <span>Wallet:</span>
+          <span class="wallet-amount" id="walletBalance">GH₵450.00</span>
+        </div>
+        <button class="btn-primary btn-sm" onclick="openFundModal()">+ Add Funds</button>
+      </div>
+    </header>
+
+    <!-- Dashboard Body -->
+    <div class="dashboard-container">
+      
+      <!-- Welcome Banner -->
+      <div class="welcome-banner">
+        <div class="welcome-text">
+          <h2>Welcome back, Reseller!</h2>
+          <p>Buy instant bundles for any network directly from your wallet balance.</p>
+        </div>
+        <button class="btn-primary" onclick="openFundModal()">Fund Wallet via MoMo</button>
+      </div>
+
+      <!-- Dashboard Grid -->
+      <div class="dashboard-grid">
+        
+        <!-- Quick Buy Panel -->
+        <div class="dash-card" id="quickBuy">
+          <h3 class="dash-card-title">&#x1F4E1; Quick Data Purchase</h3>
+          <form onsubmit="processQuickBuy(event)">
+            
+            <div class="dash-form-group">
+              <label for="dashNetwork">Select Network</label>
+              <select id="dashNetwork" class="dash-select">
+                <option value="MTN">MTN Ghana</option>
+                <option value="Telecel">Telecel Ghana</option>
+                <option value="AirtelTigo">AirtelTigo</option>
+                <option value="Glo">Glo Ghana</option>
+              </select>
+            </div>
+
+            <div class="dash-form-group">
+              <label for="dashBundle">Data Plan</label>
+              <select id="dashBundle" class="dash-select">
+                <!-- Populated by JS -->
+              </select>
+            </div>
+
+            <div class="dash-form-group">
+              <label for="dashPhone">Recipient Phone Number</label>
+              <input type="tel" id="dashPhone" class="dash-input" placeholder="0241234567" maxlength="10" required />
+            </div>
+
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px;">
+              <span style="color: var(--text-sec);">Price:</span>
+              <span id="dashPrice" style="font-weight: 700; font-size: 1.2rem; color: var(--cyan);">GH₵350</span>
+            </div>
+
+            <button type="submit" class="btn-primary-full">Instant Purchase</button>
+          </form>
+        </div>
+
+        <!-- Recent Orders Panel -->
+        <div class="dash-card" id="history">
+          <h3 class="dash-card-title">&#x1F4CB; Recent Orders</h3>
+          <div style="overflow-x: auto;">
+            <table class="history-table">
+              <thead>
+                <tr>
+                  <th>Item</th>
+                  <th>Phone</th>
+                  <th>Amount</th>
+                  <th>Status</th>
+                  <th>Time</th>
+                </tr>
+              </thead>
+              <tbody id="userTxnBody">
+                <tr>
+                  <td>MTN 2GB</td>
+                  <td>0249998877</td>
+                  <td>GH₵600</td>
+                  <td><span class="status-badge status-success">Delivered</span></td>
+                  <td>10 Mins ago</td>
+                </tr>
+                <tr>
+                  <td>Telecel 1GB</td>
+                  <td>0501112233</td>
+                  <td>GH₵320</td>
+                  <td><span class="status-badge status-success">Delivered</span></td>
+                  <td>1 Hour ago</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+      </div>
+
+    </div>
+
+  </div>
+
+  <!-- Fund Wallet Modal -->
+  <div class="modal-overlay" id="fundModal">
+    <div class="modal-box">
+      <div class="modal-header">
+        <h3>Fund Your Wallet</h3>
+        <button class="btn-close" onclick="closeFundModal()">&times;</button>
+      </div>
+      <form onsubmit="processTopup(event)">
+        <div class="dash-form-group">
+          <label>Select Payment Method</label>
+          <select class="dash-select">
+            <option>MTN Mobile Money</option>
+            <option>Telecel Cash</option>
+            <option>AT Money</option>
+            <option>Debit / Credit Card</option>
+          </select>
+        </div>
+        <div class="dash-form-group">
+          <label for="topupAmount">Amount (GH₵)</label>
+          <input type="number" id="topupAmount" class="dash-input" placeholder="e.g. 100" min="10" required />
+        </div>
+        <button type="submit" class="btn-primary-full">Proceed to Payment</button>
+      </form>
+    </div>
+  </div>
+
+  <script src="js/app.js"></script>
+  <script src="js/dashboard.js"></script>
+</body>
+</html>

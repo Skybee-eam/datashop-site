@@ -1,0 +1,296 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Sign Up | DataHub</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Space+Grotesk:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="css/style.css">
+  <script>
+    if (localStorage.getItem('theme') === 'light') {
+      document.documentElement.setAttribute('data-theme', 'light');
+    }
+  </script>
+  <style>
+    body {
+      margin: 0;
+      min-height: 100vh;
+      display: flex;
+      background: var(--bg);
+      font-family: 'Inter', sans-serif;
+    }
+    .auth-split-container {
+      display: flex;
+      width: 100vw;
+      min-height: 100vh;
+    }
+    /* Left Banner */
+    .auth-banner {
+      width: 45%;
+      background: linear-gradient(135deg, #1E40AF 0%, #1D4ED8 50%, #1E3A8A 100%);
+      padding: 60px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      position: relative;
+      overflow: hidden;
+      color: #fff;
+    }
+    .auth-banner::before {
+      content: '';
+      position: absolute;
+      top: -100px; right: -100px;
+      width: 400px; height: 400px;
+      background: rgba(255,255,255,0.08);
+      border-radius: 50%;
+      filter: blur(60px);
+    }
+    .banner-logo {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 1.6rem;
+      font-weight: 800;
+      z-index: 10;
+    }
+    .banner-content {
+      z-index: 10;
+      max-width: 480px;
+    }
+    .banner-content h1 {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 2.5rem;
+      font-weight: 800;
+      line-height: 1.2;
+      margin-bottom: 16px;
+    }
+    .banner-content p {
+      color: #93C5FD;
+      font-size: 1.05rem;
+      line-height: 1.6;
+      margin-bottom: 40px;
+    }
+    .feature-list {
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+    }
+    .feature-item {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+    }
+    .feature-icon {
+      width: 44px; height: 44px;
+      background: rgba(255,255,255,0.12);
+      border-radius: 12px;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 1.2rem;
+      backdrop-filter: blur(8px);
+    }
+    .feature-text h4 {
+      margin: 0;
+      font-size: 1rem;
+      font-weight: 700;
+    }
+    .feature-text p {
+      margin: 2px 0 0 0;
+      font-size: 0.85rem;
+      color: #BFDBFE;
+    }
+    .banner-footer {
+      z-index: 10;
+      font-size: 0.9rem;
+      color: #93C5FD;
+    }
+
+    /* Right Form */
+    .auth-form-wrap {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      padding: 40px 24px;
+      position: relative;
+    }
+    .auth-card {
+      width: 100%;
+      max-width: 420px;
+    }
+    .auth-header {
+      margin-bottom: 32px;
+    }
+    .auth-header h2 {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 2rem;
+      font-weight: 800;
+      margin: 0 0 8px 0;
+    }
+    .auth-header p {
+      color: var(--text-sec);
+      font-size: 0.95rem;
+      margin: 0;
+    }
+    .form-group {
+      margin-bottom: 20px;
+    }
+    .form-group label {
+      display: block;
+      font-size: 0.875rem;
+      font-weight: 600;
+      margin-bottom: 8px;
+      color: var(--text-sec);
+    }
+    .form-control {
+      width: 100%;
+      padding: 14px 16px;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      color: var(--text);
+      font-size: 0.95rem;
+      outline: none;
+      transition: all 0.2s;
+    }
+    .form-control:focus {
+      border-color: #2563EB;
+      box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.2);
+    }
+    .btn-submit {
+      width: 100%;
+      padding: 14px;
+      background: #2563EB;
+      color: #fff;
+      border: none;
+      border-radius: 12px;
+      font-weight: 700;
+      font-size: 1rem;
+      cursor: pointer;
+      transition: background 0.2s;
+      margin-top: 10px;
+    }
+    .btn-submit:hover {
+      background: #1D4ED8;
+    }
+    .auth-footer {
+      text-align: center;
+      margin-top: 28px;
+      font-size: 0.9rem;
+      color: var(--text-sec);
+    }
+    .auth-footer a {
+      color: #2563EB;
+      font-weight: 700;
+      text-decoration: none;
+    }
+    .back-home {
+      position: absolute;
+      top: 32px;
+      left: 32px;
+      color: var(--text-sec);
+      text-decoration: none;
+      font-size: 0.9rem;
+      font-weight: 600;
+    }
+    .back-home:hover { color: var(--text); }
+
+    @media (max-width: 992px) {
+      .auth-banner { display: none; }
+      .back-home { top: 20px; left: 20px; }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="auth-split-container">
+    
+    <!-- Left Split Banner (DataHub GH style) -->
+    <aside class="auth-banner">
+      <div class="banner-logo">
+        <span style="background:#fff; color:#1E40AF; padding:4px 10px; border-radius:8px;">DH</span>
+        <span>DataHub GH</span>
+      </div>
+
+      <div class="banner-content">
+        <h1>Ghana's Fastest Data Reseller Platform</h1>
+        <p>Create an account to unlock cheap data bundle rates and instant automated delivery.</p>
+
+        <div class="feature-list">
+          <div class="feature-item">
+            <div class="feature-icon">&#x26A1;</div>
+            <div class="feature-text">
+              <h4>Instant Delivery</h4>
+              <p>Data delivered in seconds across all networks.</p>
+            </div>
+          </div>
+          <div class="feature-item">
+            <div class="feature-icon">&#x1F512;</div>
+            <div class="feature-text">
+              <h4>Secure Payments</h4>
+              <p>Mobile Money and cards fully encrypted.</p>
+            </div>
+          </div>
+          <div class="feature-item">
+            <div class="feature-icon">&#x1F4F6;</div>
+            <div class="feature-text">
+              <h4>All Networks</h4>
+              <p>MTN, Telecel, AirtelTigo and Glo covered.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="banner-footer">
+        Join 20,000+ satisfied Ghanaian resellers
+      </div>
+    </aside>
+
+    <!-- Right Split Form -->
+    <main class="auth-form-wrap">
+      <a href="index.html" class="back-home">&#8592; Back to home</a>
+
+      <div class="auth-card">
+        <div class="auth-header">
+          <h2>Create Account</h2>
+          <p>Sign up to start buying cheap data</p>
+        </div>
+
+        <form id="signupForm">
+          <div class="form-group">
+            <label for="fullname">Full Name</label>
+            <input type="text" id="fullname" class="form-control" placeholder="John Doe" required />
+          </div>
+
+          <div class="form-group">
+            <label for="email">Email Address</label>
+            <input type="email" id="email" class="form-control" placeholder="name@domain.com" required />
+          </div>
+
+          <div class="form-group">
+            <label for="phone">Phone Number (Ghana)</label>
+            <input type="tel" id="phone" class="form-control" placeholder="0241234567" required />
+          </div>
+
+          <div class="form-group">
+            <label for="password">Password</label>
+            <input type="password" id="password" class="form-control" placeholder="••••••••" required />
+          </div>
+
+          <button type="submit" class="btn-submit">Create Account &#8594;</button>
+        </form>
+
+        <div class="auth-footer">
+          Already have an account? <a href="login.html">Sign In &#8594;</a>
+        </div>
+      </div>
+    </main>
+
+  </div>
+
+  <script src="js/auth.js"></script>
+</body>
+</html>

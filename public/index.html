@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>DataHub | Cheap & Reliable Data in Ghana</title>
+  <meta name="description" content="Ghana's leading instant data top-up and mobile bundle service. Buy MTN, Telecel, AirtelTigo data bundles instantly." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="css/style.css">
+  <script>
+    if (localStorage.getItem('theme') === 'dark') {
+      document.documentElement.setAttribute('data-theme', 'dark');
+    }
+  </script>
+</head>
+<body>
+
+  <!-- FLOATING ACTION BUTTONS -->
+  <button class="app-float" id="pwaBtn" onclick="alert('Install DataHub App: Open browser menu and select Add to Home Screen.')">
+    <span>&#x1F4E5; Install App</span>
+  </button>
+
+  <a href="https://whatsapp.com" class="wa-float" target="_blank" aria-label="WhatsApp Support">
+    <span>&#x1F4AC;</span>
+  </a>
+
+  <!-- GLOBAL SIDEBAR OVERLAY & DRAWER -->
+  <div class="sidebar-overlay" id="sidebarOverlay"></div>
+  <aside class="global-sidebar" id="globalSidebar">
+    <div class="g-sidebar-header">
+      <h3>Menu</h3>
+      <button class="g-sidebar-close" id="closeGlobalSidebar">&times;</button>
+    </div>
+    <nav class="g-sidebar-nav">
+      <a href="index.html" class="g-sidebar-link active"><span>&#x1F3E0;</span> Home</a>
+      <a href="#bundles" class="g-sidebar-link"><span>&#x26A1;</span> Buy Data Plans</a>
+      <a href="#services" class="g-sidebar-link"><span>&#x1F6E0;</span> Services</a>
+      <a href="dashboard.html" class="g-sidebar-link"><span>&#x1F483;</span> Reseller Dashboard</a>
+      <a href="admin.html" class="g-sidebar-link"><span>&#x1F4CA;</span> Admin Panel</a>
+      <a href="login.html" class="g-sidebar-link"><span>&#x1F511;</span> Login</a>
+      <a href="signup.html" class="g-sidebar-link"><span>&#x1F4DD;</span> Join / Register</a>
+    </nav>
+  </aside>
+
+  <!-- NAVIGATION -->
+  <nav>
+    <div style="display: flex; align-items: center; gap: 12px;">
+      <button class="sidebar-toggle-btn" id="openGlobalSidebar" aria-label="Open Sidebar">&#9776;</button>
+      <a href="index.html" class="nav-logo">
+        <h2>DataHub <span>GH</span></h2>
+      </a>
+    </div>
+
+    <div class="nav-btns">
+      <button id="themeToggle" class="theme-toggle" aria-label="Toggle Theme">☀️</button>
+      <a href="dashboard.html" class="btn btn-login" style="border:none;">Dashboard</a>
+      <a href="login.html" class="btn btn-login">Login</a>
+      <a href="signup.html" class="btn btn-register">Join</a>
+    </div>
+  </nav>
+
+  <!-- HERO SECTION -->
+  <section class="hero">
+    <p class="hero-tag">Safe • Cheap • Automated</p>
+    <h1>Cheapest Data Hub in Ghana.</h1>
+    <p>Buy MTN, Telecel, and AirtelTigo data at wholesale prices. Pay your DStv bills and WAEC result checkers instantly with our platform.</p>
+    
+    <div class="hero-btns">
+      <a href="signup.html" class="btn btn-register btn-large">Get Started Now &#8594;</a>
+      <a href="#bundles" class="btn btn-login btn-large" style="background:var(--surface);">View Data Plans</a>
+    </div>
+  </section>
+
+  <!-- SERVICES GRID SECTION -->
+  <section class="services">
+    <h2 class="section-title">Our Services</h2>
+    <div class="service-grid">
+      <div class="s-card">
+        <div class="s-icon">&#x1F4F6;</div>
+        <h3>Cheap Data Bundles</h3>
+        <p>Enjoy the most affordable MTN, Telecel, and AirtelTigo data bundles delivered instantly to your phone.</p>
+      </div>
+      <div class="s-card">
+        <div class="s-icon">&#x1F1F0;</div>
+        <h3>AFA Registration</h3>
+        <p>Register your SIM on the AFA platform through us for exclusive airtime and data discounts.</p>
+      </div>
+      <div class="s-card">
+        <div class="s-icon">&#x1F393;</div>
+        <h3>Result Checkers</h3>
+        <p>Buy WAEC, BECE, and WASSCE result checkers instantly without leaving your home.</p>
+      </div>
+      <div class="s-card">
+        <div class="s-icon">&#x1F4FA;</div>
+        <h3>DStv & GOtv Payments</h3>
+        <p>Renew your DStv and GOtv subscriptions instantly from our portal with zero service charges.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- BUNDLES SECTION -->
+  <section class="bundles-section" id="bundles">
+    <h2 class="section-title">Select Network & Data Bundle</h2>
+
+    <div class="bundle-tabs">
+      <button class="bundle-tab active" data-net="MTN">MTN Ghana</button>
+      <button class="bundle-tab" data-net="Telecel">Telecel Ghana</button>
+      <button class="bundle-tab" data-net="AirtelTigo">AirtelTigo</button>
+      <button class="bundle-tab" data-net="Glo">Glo Ghana</button>
+    </div>
+
+    <!-- MTN -->
+    <div class="bundle-panel active" id="panel-MTN">
+      <div class="bundle-card">
+        <div class="bundle-size">500MB</div>
+        <div class="bundle-validity">30 Days • SME</div>
+        <div class="bundle-price">GH₵ 200</div>
+        <button class="btn btn-register" style="width:100%;" onclick="buyBundle(this,'MTN','500MB','200')">Buy Now</button>
+      </div>
+      <div class="bundle-card">
+        <div class="bundle-size">1GB</div>
+        <div class="bundle-validity">30 Days • Popular</div>
+        <div class="bundle-price">GH₵ 350</div>
+        <button class="btn btn-register" style="width:100%;" onclick="buyBundle(this,'MTN','1GB','350')">Buy Now</button>
+      </div>
+      <div class="bundle-card">
+        <div class="bundle-size">2GB</div>
+        <div class="bundle-validity">30 Days • Hot</div>
+        <div class="bundle-price">GH₵ 600</div>
+        <button class="btn btn-register" style="width:100%;" onclick="buyBundle(this,'MTN','2GB','600')">Buy Now</button>
+      </div>
+      <div class="bundle-card">
+        <div class="bundle-size">5GB</div>
+        <div class="bundle-validity">30 Days</div>
+        <div class="bundle-price">GH₵ 1,300</div>
+        <button class="btn btn-register" style="width:100%;" onclick="buyBundle(this,'MTN','5GB','1300')">Buy Now</button>
+      </div>
+    </div>
+
+    <!-- Telecel -->
+    <div class="bundle-panel" id="panel-Telecel">
+      <div class="bundle-card">
+        <div class="bundle-size">150MB</div>
+        <div class="bundle-validity">7 Days</div>
+        <div class="bundle-price">GH₵ 100</div>
+        <button class="btn btn-register" style="width:100%;" onclick="buyBundle(this,'Telecel','150MB','100')">Buy Now</button>
+      </div>
+      <div class="bundle-card">
+        <div class="bundle-size">1GB</div>
+        <div class="bundle-validity">30 Days</div>
+        <div class="bundle-price">GH₵ 320</div>
+        <button class="btn btn-register" style="width:100%;" onclick="buyBundle(this,'Telecel','1GB','320')">Buy Now</button>
+      </div>
+      <div class="bundle-card">
+        <div class="bundle-size">5GB</div>
+        <div class="bundle-validity">30 Days</div>
+        <div class="bundle-price">GH₵ 1,300</div>
+        <button class="btn btn-register" style="width:100%;" onclick="buyBundle(this,'Telecel','5GB','1300')">Buy Now</button>
+      </div>
+    </div>
+
+    <!-- AirtelTigo -->
+    <div class="bundle-panel" id="panel-AirtelTigo">
+      <div class="bundle-card">
+        <div class="bundle-size">300MB</div>
+        <div class="bundle-validity">7 Days</div>
+        <div class="bundle-price">GH₵ 150</div>
+        <button class="btn btn-register" style="width:100%;" onclick="buyBundle(this,'AirtelTigo','300MB','150')">Buy Now</button>
+      </div>
+      <div class="bundle-card">
+        <div class="bundle-size">1GB</div>
+        <div class="bundle-validity">30 Days</div>
+        <div class="bundle-price">GH₵ 380</div>
+        <button class="btn btn-register" style="width:100%;" onclick="buyBundle(this,'AirtelTigo','1GB','380')">Buy Now</button>
+      </div>
+      <div class="bundle-card">
+        <div class="bundle-size">5GB</div>
+        <div class="bundle-validity">30 Days</div>
+        <div class="bundle-price">GH₵ 1,450</div>
+        <button class="btn btn-register" style="width:100%;" onclick="buyBundle(this,'AirtelTigo','5GB','1450')">Buy Now</button>
+      </div>
+    </div>
+
+    <!-- Glo -->
+    <div class="bundle-panel" id="panel-Glo">
+      <div class="bundle-card">
+        <div class="bundle-size">200MB</div>
+        <div class="bundle-validity">14 Days</div>
+        <div class="bundle-price">GH₵ 100</div>
+        <button class="btn btn-register" style="width:100%;" onclick="buyBundle(this,'Glo','200MB','100')">Buy Now</button>
+      </div>
+      <div class="bundle-card">
+        <div class="bundle-size">1GB</div>
+        <div class="bundle-validity">30 Days</div>
+        <div class="bundle-price">GH₵ 300</div>
+        <button class="btn btn-register" style="width:100%;" onclick="buyBundle(this,'Glo','1GB','300')">Buy Now</button>
+      </div>
+      <div class="bundle-card">
+        <div class="bundle-size">5GB</div>
+        <div class="bundle-validity">30 Days</div>
+        <div class="bundle-price">GH₵ 1,200</div>
+        <button class="btn btn-register" style="width:100%;" onclick="buyBundle(this,'Glo','5GB','1200')">Buy Now</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- REFER & EARN SECTION -->
+  <section class="refer-earn">
+    <div style="flex: 1;">
+      <span class="refer-badge">New Bonus</span>
+      <h2>Refer Agents & Earn GH₵ 15.00</h2>
+      <p style="color:var(--text-sec); font-size: 0.95rem; margin-bottom: 20px;">Invite your friends to register as Agents. For every successful activation, you get <b>GH₵ 15.00</b> instantly. Cashout starts at <b>GH₵ 30.00</b>.</p>
+      <a href="signup.html" class="btn btn-register btn-large">Start Earning Now &#8594;</a>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    <div class="footer-container">
+      <div class="footer-grid">
+        <div class="footer-brand">
+          <h3>DataHub GH</h3>
+          <p>Ghana's most reliable hub for digital services and affordable data bundles.</p>
+        </div>
+
+        <div class="footer-col">
+          <h5>All Pages</h5>
+          <ul>
+            <li><a href="index.html">Storefront Home</a></li>
+            <li><a href="dashboard.html">User Reseller Dashboard</a></li>
+            <li><a href="admin.html">Admin Dashboard</a></li>
+            <li><a href="login.html">Login</a></li>
+            <li><a href="signup.html">Register / Join</a></li>
+          </ul>
+        </div>
+
+        <div class="footer-col">
+          <h5>Services</h5>
+          <ul>
+            <li><a href="#bundles">Data Bundles</a></li>
+            <li><a href="#services">AFA Registration</a></li>
+            <li><a href="#services">Result Checkers</a></li>
+            <li><a href="#services">DStv / GOtv Top-up</a></li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="footer-bottom">
+        <p>&copy; 2026 DataHub Ghana. All rights reserved.</p>
+      </div>
+    </div>
+  </footer>
+
+  <script src="js/app.js"></script>
+</body>
+</html>

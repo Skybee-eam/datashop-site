@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Admin Panel | DataHub</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Space+Grotesk:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/dashboard.css">
+  <link rel="stylesheet" href="css/admin.css" />
+  <script>
+    if (localStorage.getItem('theme') === 'light') {
+      document.documentElement.setAttribute('data-theme', 'light');
+    }
+  </script>
+</head>
+<body>
+
+  <!-- Left Sidebar -->
+  <aside class="dash-sidebar" id="dashSidebar">
+    <div class="dash-sidebar-header">
+      <a href="index.html" class="user-brand">
+        <h1>DataHub Admin</h1>
+      </a>
+    </div>
+    <nav class="dash-sidebar-nav">
+      <a href="#" class="dash-sidebar-link active"><span>&#x1F4CA;</span> Dashboard</a>
+      <a href="#transactions" class="dash-sidebar-link"><span>&#x1F4B8;</span> Transactions</a>
+      <a href="#users" class="dash-sidebar-link"><span>&#x1F465;</span> Manage Users</a>
+      <a href="#bundles" class="dash-sidebar-link"><span>&#x1F4E6;</span> Data Bundles</a>
+      <a href="dashboard.html" class="dash-sidebar-link"><span>&#x1F464;</span> User Portal</a>
+      <a href="index.html" class="dash-sidebar-link" style="margin-top: auto;"><span>&#x1F3E0;</span> Storefront</a>
+      <a href="#" onclick="localStorage.removeItem('datashop_user'); window.location.href='index.html';" class="dash-sidebar-link"><span>&#x1F6AA;</span> Sign Out</a>
+    </nav>
+  </aside>
+
+  <!-- Main Content Wrapper -->
+  <div class="dash-main-wrap">
+    
+    <!-- Top Header Bar -->
+    <header class="user-header">
+      <div style="display: flex; align-items: center; gap: 16px;">
+        <button class="mobile-toggle" id="dashMobileToggle">&#9776;</button>
+        <span style="font-weight: 700; font-size: 1.1rem;">Admin Overview</span>
+      </div>
+      <div class="user-nav-actions">
+        <button id="themeToggle" class="theme-toggle" aria-label="Toggle Theme">☀️</button>
+        <div class="admin-profile" style="display: flex; align-items: center; gap: 10px;">
+          <div class="admin-avatar" style="width: 36px; height: 36px; border-radius: 50%; background: var(--cyan); color: #000; display: flex; align-items: center; justify-content: center; font-weight: 700;">AD</div>
+          <span style="font-weight: 600;">Admin</span>
+        </div>
+      </div>
+    </header>
+
+    <!-- Dashboard Body -->
+    <div class="dashboard-container">
+      
+      <h2 class="section-title">Dashboard Overview</h2>
+      
+      <!-- Metrics -->
+      <div class="metrics-grid">
+        <div class="metric-card">
+          <span class="metric-title">Total Revenue</span>
+          <span class="metric-value">GH₵ 42,500</span>
+          <span class="metric-change change-pos">&#8593; 12.5% this month</span>
+        </div>
+        <div class="metric-card">
+          <span class="metric-title">Active Resellers</span>
+          <span class="metric-value">1,248</span>
+          <span class="metric-change change-pos">&#8593; 5.2% this month</span>
+        </div>
+        <div class="metric-card">
+          <span class="metric-title">Data Sold (MTN)</span>
+          <span class="metric-value">2.4 TB</span>
+          <span class="metric-change change-pos">&#8593; 20% this month</span>
+        </div>
+      </div>
+
+      <!-- Recent Transactions -->
+      <div class="admin-table-container" id="transactions">
+        <div class="admin-table-header">
+          <h3>Recent Transactions</h3>
+          <button class="btn-outline">View All</button>
+        </div>
+        <div style="overflow-x: auto;">
+          <table>
+            <thead>
+              <tr>
+                <th>Txn ID</th>
+                <th>User / Phone</th>
+                <th>Network</th>
+                <th>Bundle</th>
+                <th>Price</th>
+                <th>Status</th>
+                <th>Time</th>
+              </tr>
+            </thead>
+            <tbody id="txnBody">
+              <!-- Populated by JS -->
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <!-- Manage Users -->
+      <div class="admin-table-container" id="users">
+        <div class="admin-table-header">
+          <h3>Top Resellers</h3>
+          <button class="btn-primary btn-sm">Add User</button>
+        </div>
+        <div style="overflow-x: auto;">
+          <table>
+            <thead>
+              <tr>
+                <th>Name</th>
+                <th>Phone</th>
+                <th>Wallet Balance</th>
+                <th>Joined</th>
+                <th>Action</th>
+              </tr>
+            </thead>
+            <tbody id="usersBody">
+              <!-- Populated by JS -->
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <script src="js/app.js"></script>
+  <script src="js/admin.js"></script>
+</body>
+</html>
