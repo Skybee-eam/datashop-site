@@ -4,6 +4,8 @@ const sqlite3 = require('sqlite3').verbose();
 const bcrypt = require('bcrypt');
 const path = require('path');
 
+const fs = require('fs');
+
 const app = express();
 const PORT = 3000;
 
@@ -11,8 +13,15 @@ app.use(cors());
 app.use(express.json());
 app.use(express.static(path.join(__dirname, 'public')));
 
-// Database setup
-const db = new sqlite3.Database('./data/datashop.sqlite', (err) => {
+// Database setup - use /tmp on Vercel read-only filesystem
+const isVercel = process.env.VERCEL || process.env.AWS_REGION;
+const dbDir = isVercel ? '/tmp' : path.join(__dirname, 'data');
+if (!fs.existsSync(dbDir)) {
+  fs.mkdirSync(dbDir, { recursive: true });
+}
+const dbPath = path.join(dbDir, 'datashop.sqlite');
+
+const db = new sqlite3.Database(dbPath, (err) => {
   if (err) console.error('Database opening error: ', err);
 });
 
@@ -208,6 +217,10 @@ app.get('/api/admin/stats', (req, res) => {
   });
 });
 
-app.listen(PORT, () => {
-  console.log('DataHub Backend API running on http://localhost:' + PORT);
-});
+if (!process.env.VERCEL) {
+  app.listen(PORT, () => {
+    console.log('DataHub Backend API running on http://localhost:' + PORT);
+  });
+}
+
+module.exports = app;
